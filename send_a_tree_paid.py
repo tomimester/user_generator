@@ -1,6 +1,11 @@
 import csv
 import random
 from datetime import datetime
+import sys
+
+year=int(sys.argv[1])
+month=int(sys.argv[2])
+day=int(sys.argv[3])
 
 #LOADING USERS
 userlist=[]
@@ -27,7 +32,7 @@ for i in range(0,len(userlist)):
     supertree_multiplier=random.randint(40,60)/100
 
     #CALCULATION
-    datediff=abs(datetime.strptime(user_info[0], "%Y-%m-%d")-datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)).days
+    datediff=abs(datetime.strptime(user_info[0], "%Y-%m-%d")-datetime(year, month, day, 0,0,0,0)).days
 
     #a=send_a_tree
     a=date_weight[datediff]/203930
@@ -54,5 +59,5 @@ for i in range(0,number_of_sends):
     hour = random.randint(0,23)
     minute = random.randint(0, 59)
     second = random.randint(0, 59)
-    final_date = datetime(datetime.now().year, datetime.now().month, datetime.now().day, hour, minute, second).strftime('%Y-%m-%d %H:%M:%S')
+    final_date = datetime(year, month, day, hour, minute, second).strftime('%Y-%m-%d')
     print(final_date, sended[i], "sent_a_super_tree")

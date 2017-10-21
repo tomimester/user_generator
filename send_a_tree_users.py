@@ -4,7 +4,11 @@ from numpy.random import choice
 from datetime import timedelta
 from datetime import datetime
 
-number_of_new_users=int(sys.argv[1])
+number_of_new_users=int(float(sys.argv[1]))
+year=int(sys.argv[2])
+month=int(sys.argv[3])
+day=int(sys.argv[4])
+last_user=int(sys.argv[5])
 
 geoips = ["2.84.0.0", "1.72.0.0", "49.144.0.0", "41.0.0.0", "151.106.0.0"]
 source = ["google", "invite_a_friend", "article", "paid"]
@@ -43,7 +47,7 @@ for i in birth_weight:
     probability_birth.append(i/sum(birth_weight))
 
 #USERID
-userid = 1000000
+userid = last_user
 
 #DATETIMES
 datelist=[]
@@ -52,7 +56,7 @@ for i in range(0,number_of_new_users):
     hour = random.randint(0,23)
     minute = random.randint(0, 59)
     second = random.randint(0, 59)
-    final_date = datetime(datetime.now().year, datetime.now().month, datetime.now().day, hour, minute, second).strftime('%Y-%m-%d %H:%M:%S')
+    final_date = datetime(year, month, day, hour, minute, second).strftime('%Y-%m-%d %H:%M:%S')
     datelist.append(final_date)
 
 datelist.sort()

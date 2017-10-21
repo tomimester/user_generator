@@ -1,6 +1,11 @@
 import csv
 import random
 from datetime import datetime
+import sys
+
+year=int(sys.argv[1])
+month=int(sys.argv[2])
+day=int(sys.argv[3])
 
 #LOADING USERS
 userlist=[]
@@ -26,7 +31,7 @@ for i in range(0,len(userlist)):
     date_weight={0:26104,1:15660,2:7288,3:6387,4:6091,5:5813,6:5724,7:5549,8:5190,9:4953,10:4699,11:4579,12:4085,13:3994,14:3883,15:3489,16:3212,17:2808,18:2630,19:2532,20:2480,21:2423,22:2404,23:2236,24:2009,25:1971,26:1963,27:1931,28:1923,29:1904,30:1833,31:1681,32:1623,33:1614,34:1592,35:1584,36:1566,37:1515,38:1502,39:1441,40:1417,41:1402,42:1374,43:1293,44:1259,45:1245,46:1225,47:1183,48:1182,49:1122,50:1059,51:1049,52:1039,53:1025,54:967,55:964,56:958,57:953,58:905,59:870,60:849,61:848,62:826,63:808,64:789,65:785,66:736,67:708,68:656,69:656,70:639,71:623,72:617,73:612,74:606,75:552,76:532,77:519,78:508,79:505,80:488,81:459,82:430,83:423,84:383,85:376,86:367,87:340,88:320,89:317,90:314,91:289,92:250,93:247,94:242,95:222,96:199,97:189,98:175,99:120}
 
     #CALCULATION
-    datediff=abs(datetime.strptime(user_info[0], "%Y-%m-%d")-datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)).days
+    datediff=abs(datetime.strptime(user_info[0], "%Y-%m-%d")-datetime(year, month, day, 0, 0, 0, 0)).days
 
     #a=send_a_tree
     a=date_weight[datediff]/203930
@@ -52,5 +57,5 @@ for i in range(0,number_of_sends):
     hour = random.randint(0,23)
     minute = random.randint(0, 59)
     second = random.randint(0, 59)
-    final_date = datetime(datetime.now().year, datetime.now().month, datetime.now().day, hour, minute, second).strftime('%Y-%m-%d %H:%M:%S')
+    final_date = datetime(year, month, day, hour, minute, second).strftime('%Y-%m-%d)
     print(final_date, sended[i], "sent_a_free_tree")
