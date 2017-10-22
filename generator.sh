@@ -1,4 +1,8 @@
+#!/bin/bash
+PATH=/opt/someApp/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
 start=$1
+[ -z "$start" ] && start=$(date -d"yesterday" +%F)
 startdate=$(date -d"$start" +%F)
 today=$(date +%F)
 
@@ -31,6 +35,7 @@ python3 send_a_tree_users.py $number_of_users_weekend $formatted_date $last_user
 cat ~/userlist/$startdate >> userlist.csv
 python3 send_a_tree_free.py $formatted_date > ~/free_tree/$startdate
 python3 send_a_tree_paid.py $formatted_date > ~/paid/$startdate
+cat paid/$startdate free_tree/$startdate userlist/$startdate |sort > /usr/share/nginx/html/$startdate
 
 startdate=$(date -d"$startdate + 1 day" +%F)
 done

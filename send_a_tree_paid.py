@@ -33,6 +33,8 @@ for i in range(0,len(userlist)):
 
     #CALCULATION
     datediff=abs(datetime.strptime(user_info[0], "%Y-%m-%d")-datetime(year, month, day, 0,0,0,0)).days
+    if datediff > 79:
+        date_weight[datediff]=500
 
     #a=send_a_tree
     a=date_weight[datediff]/203930
