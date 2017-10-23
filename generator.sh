@@ -18,13 +18,14 @@ growth=$(python3 growth.py)
 day_before=$(date -d"$startdate - 1 day" +%F)
 #echo day_before$day_before
 
-number_of_day_before=$(echo $number_of_users)
+number_of_day_before=$(cat ~/number_of_users.csv)
 [ -z "$number_of_day_before" ] && number_of_day_before=$(cat userlist.csv | grep $day_before |wc -l)
 #echo number_of_day_before$number_of_day_before
 [ "$number_of_day_before" == 0 ] && number_of_day_before=100
 #echo number_of_day_before$number_of_day_before
 
 number_of_users=$(echo "$number_of_day_before * $growth" |bc)
+echo $number_of_users > ~/number_of_users.csv
 number_of_users_weekend=$(echo "$number_of_users * $weekend_multiplier" |bc)
 echo number_of_users_weekend": "$number_of_users_weekend
 
