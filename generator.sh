@@ -2,11 +2,13 @@
 PATH=/opt/someApp/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 start=$1
+end=$2
 [ -z "$start" ] && start=$(date -d"yesterday" +%F)
+[ -z "$end" ] && end=$(date +%F)
 startdate=$(date -d"$start" +%F)
-today=$(date +%F)
+enddate=$(date -d"$end" +%F)
 
-while [ $startdate != $today ]
+while [ $startdate != $enddate ]
 do
 day_of_the_week=$(date -d"$startdate" +%a)
 weekend_multiplier=1
@@ -27,7 +29,7 @@ number_of_day_before=$(cat ~/number_of_users.csv)
 number_of_users=$(echo "$number_of_day_before * $growth" |bc)
 echo $number_of_users > ~/number_of_users.csv
 number_of_users_weekend=$(echo "$number_of_users * $weekend_multiplier" |bc)
-echo number_of_users_weekend": "$number_of_users_weekend
+echo number_of_users": "$number_of_users_weekend $startdate
 
 last_user=$(cat userlist.csv |tail -1 |cut -d' ' -f3)
 [ -z "$last_user" ] && last_user=1000000
